@@ -10,7 +10,11 @@ const InputGoalScreen = ({ route, navigation }) => {
 
   const handleAddGoal = () => {
     // Code to add a goal
-    setGoals(prevGoals => [...prevGoals, { goalName, amountRequired, estimatedCompletion }]);
+    setGoals(prevGoals => {
+      const newGoals = [...prevGoals, { goalName, amountRequired, estimatedCompletion }];
+      return newGoals;
+  });
+  
     navigation.goBack();
   };
 

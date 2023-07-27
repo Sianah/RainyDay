@@ -1,8 +1,33 @@
 import React, { useState } from 'react';
 import { View, Text, Button, FlatList, StyleSheet } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useEffect } from 'react';
+
 
 const HomeScreen = ({ navigation }) => {
   const [goals, setGoals] = useState([]);
+  const storeData = async (value) => {
+    try {
+      const jsonValue = JSON.stringify(value)
+      await AsyncStorage.setItem('@goals', jsonValue)
+    } catch (e) {
+      // saving error
+      console.error("Error saving data:", e);
+    }
+}
+const loadData = async () => {
+  try {
+    const jsonValue = await AsyncStorage.getItem('@goals')
+    if (jsonValue != null) {
+      setGoals(JSON.parse(jsonValue));
+    }
+  } catch (e) {
+    // loading error
+    console.error("Error loading data:", e);
+  }
+}
+
+
 
   navigation.setOptions({
     title: 'Home',
@@ -13,6 +38,10 @@ const HomeScreen = ({ navigation }) => {
       />
     ),
   });
+  useEffect(() => {
+    loadData();
+}, []);
+
 
   return (
     <View style={{ flex: 1, padding: 20 }}>
