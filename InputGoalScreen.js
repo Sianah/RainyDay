@@ -6,11 +6,13 @@ const InputGoalScreen = ({ route, navigation }) => {
 
   const [goalName, setGoalName] = useState('');
   const [amountRequired, setAmountRequired] = useState('');
+  const [estimatedCompletion, setEstimatedCompletion] = useState('');
 
   const saveGoal = () => {
     const newGoal = {
       goalName,
       amountRequired: parseFloat(amountRequired),
+      estimatedCompletion,
       // ... Add other attributes as needed
     };
 
@@ -35,6 +37,14 @@ const InputGoalScreen = ({ route, navigation }) => {
         onChangeText={setAmountRequired}
         placeholder="Enter required amount"
         keyboardType="numeric"
+      />
+
+      <Text style={styles.label}>Estimated Completion By:</Text>
+      <TextInput 
+        style={styles.inputBox}
+        value={estimatedCompletion}
+        onChangeText={setEstimatedCompletion}
+        placeholder="Enter when you want to complete this goal"
       />
 
       <Button title="Save Goal" onPress={saveGoal} />
@@ -63,6 +73,7 @@ const styles = StyleSheet.create({
 });
 
 export default InputGoalScreen;
+
 
 
 
