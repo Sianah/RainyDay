@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet } from 'react-native';
+import { View, TextInput, Button, StyleSheet, Text } from 'react-native';
 
 const InputGoalScreen = ({ route, navigation }) => {
   const [goalName, setGoalName] = useState('');
@@ -15,25 +15,30 @@ const InputGoalScreen = ({ route, navigation }) => {
   };
 
   return (
-    <View style={styles.screen}>
+    <View style={styles.container}>
+      <Text style={styles.label}>Goal Name:</Text>
       <TextInput 
-        placeholder="Goal Name:" 
+        style={styles.inputBox}
         value={goalName}
         onChangeText={setGoalName}
-        style={styles.input}
+        placeholder="Enter goal name"
       />
+
+      <Text style={styles.label}>Amount Required:</Text>
       <TextInput 
-        placeholder="Amount Required:" 
+        style={styles.inputBox}
         value={amountRequired}
         onChangeText={setAmountRequired}
-        style={styles.input}
+        placeholder="Enter required amount"
         keyboardType="numeric"
       />
+
+      <Text style={styles.label}>Estimated Completion By:</Text>
       <TextInput 
-        placeholder="Enter when you would like to complete this goal"
+        style={styles.inputBox}
         value={estimatedCompletion}
         onChangeText={setEstimatedCompletion}
-        style={styles.input}
+        placeholder="Enter when you would like to complete this goal"
       />
       <Button title="Add Goal" onPress={handleAddGoal} />
     </View>
@@ -41,18 +46,23 @@ const InputGoalScreen = ({ route, navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  screen: {
+  container: {
     flex: 1,
     padding: 20,
-    justifyContent: 'center',
+    backgroundColor: 'white'
   },
-  input: {
-    padding: 10,
-    marginBottom: 20,
+  label: {
+    fontSize: 16,
+    marginVertical: 10,
+    fontWeight: 'bold'
+  },
+  inputBox: {
     borderWidth: 1,
     borderColor: '#ccc',
-    borderRadius: 8,
-  },
+    padding: 10,
+    borderRadius: 5,
+    marginBottom: 20
+  }
 });
 
 export default InputGoalScreen;
