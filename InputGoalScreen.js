@@ -1,78 +1,62 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, TextInput, Button, StyleSheet } from 'react-native';
 
 const InputGoalScreen = ({ route, navigation }) => {
-  const { setGoals } = route.params;
-
   const [goalName, setGoalName] = useState('');
   const [amountRequired, setAmountRequired] = useState('');
   const [estimatedCompletion, setEstimatedCompletion] = useState('');
 
-  const saveGoal = () => {
-    const newGoal = {
-      goalName,
-      amountRequired: parseFloat(amountRequired),
-      estimatedCompletion,
-      // ... Add other attributes as needed
-    };
+  const { setGoals } = route.params;
 
-    setGoals(prevGoals => [...prevGoals, newGoal]);
+  const handleAddGoal = () => {
+    // Code to add a goal
+    setGoals(prevGoals => [...prevGoals, { goalName, amountRequired, estimatedCompletion }]);
     navigation.goBack();
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.label}>Goal Name:</Text>
+    <View style={styles.screen}>
       <TextInput 
-        style={styles.inputBox}
+        placeholder="Goal Name:" 
         value={goalName}
         onChangeText={setGoalName}
-        placeholder="Enter goal name"
+        style={styles.input}
       />
-
-      <Text style={styles.label}>Amount Required:</Text>
       <TextInput 
-        style={styles.inputBox}
+        placeholder="Amount Required:" 
         value={amountRequired}
         onChangeText={setAmountRequired}
-        placeholder="Enter required amount"
+        style={styles.input}
         keyboardType="numeric"
       />
-
-      <Text style={styles.label}>Estimated Completion By:</Text>
       <TextInput 
-        style={styles.inputBox}
+        placeholder="Enter when you would like to complete this goal"
         value={estimatedCompletion}
         onChangeText={setEstimatedCompletion}
-        placeholder="Enter when you want to complete this goal"
+        style={styles.input}
       />
-
-      <Button title="Save Goal" onPress={saveGoal} />
+      <Button title="Add Goal" onPress={handleAddGoal} />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  container: {
+  screen: {
     flex: 1,
     padding: 20,
-    backgroundColor: 'white'
+    justifyContent: 'center',
   },
-  label: {
-    fontSize: 16,
-    marginVertical: 10,
-    fontWeight: 'bold'
-  },
-  inputBox: {
+  input: {
+    padding: 10,
+    marginBottom: 20,
     borderWidth: 1,
     borderColor: '#ccc',
-    padding: 10,
-    borderRadius: 5,
-    marginBottom: 20
-  }
+    borderRadius: 8,
+  },
 });
 
 export default InputGoalScreen;
+
 
 
 
