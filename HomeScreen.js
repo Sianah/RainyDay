@@ -3,8 +3,18 @@ import { View, Text, Button, FlatList, StyleSheet } from 'react-native';
 
 
 const HomeScreen = ({ navigation }) => {
+  
   const [goals, setGoals] = useState([]);
-
+  
+  navigation.setOptions({
+    title: 'Home',
+    headerLeft: () => (
+      <Button
+        title="Total Saving"
+        onPress={() => navigation.navigate('TotalSavings', { goals })}
+      />
+    ),
+  });
   return (
     <View style={{ flex: 1, padding: 20 }}>
       <FlatList 
@@ -24,6 +34,7 @@ const HomeScreen = ({ navigation }) => {
         title="Add New Goal" 
         onPress={() => navigation.navigate('InputGoal', { setGoals })}
       />
+      
     </View>
   );
 }
