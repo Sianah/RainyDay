@@ -40,3 +40,4 @@ const InputGoalScreen = ({ route, navigation }) => {
 
 export default InputGoalScreen;
 
+
