@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
 const InputGoalScreen = ({ route, navigation }) => {
   const { setGoals } = route.params;
@@ -19,17 +19,21 @@ const InputGoalScreen = ({ route, navigation }) => {
   };
 
   return (
-    <View style={{ flex: 1, padding: 20 }}>
-      <Text>Goal Name:</Text>
+    <View style={styles.container}>
+      <Text style={styles.label}>Goal Name:</Text>
       <TextInput 
+        style={styles.inputBox}
         value={goalName}
         onChangeText={setGoalName}
+        placeholder="Enter goal name"
       />
 
-      <Text>Amount Required:</Text>
+      <Text style={styles.label}>Amount Required:</Text>
       <TextInput 
+        style={styles.inputBox}
         value={amountRequired}
         onChangeText={setAmountRequired}
+        placeholder="Enter required amount"
         keyboardType="numeric"
       />
 
@@ -38,6 +42,27 @@ const InputGoalScreen = ({ route, navigation }) => {
   );
 }
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: 'white'
+  },
+  label: {
+    fontSize: 16,
+    marginVertical: 10,
+    fontWeight: 'bold'
+  },
+  inputBox: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 10,
+    borderRadius: 5,
+    marginBottom: 20
+  }
+});
+
 export default InputGoalScreen;
+
 
 
