@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, Button, FlatList } from 'react-native';
+import { View, Text, Button, FlatList, StyleSheet } from 'react-native';
+
 
 const HomeScreen = ({ navigation }) => {
   const [goals, setGoals] = useState([]);
@@ -10,12 +11,13 @@ const HomeScreen = ({ navigation }) => {
         data={goals}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
-          <View style={{ marginBottom: 15 }}>
-            <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{item.goalName}</Text>
-            <Text>Amount Required: ${item.amountRequired}</Text>
-            <Text>Estimated Completion By: {item.estimatedCompletion}</Text>
+          <View style={styles.goalBox}>
+              <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{item.goalName}</Text>
+              <Text>Amount Required: ${item.amountRequired}</Text>
+              <Text>Estimated Completion By: {item.estimatedCompletion}</Text>
           </View>
-        )}
+      )}
+      
       />
 
       <Button 
@@ -25,6 +27,26 @@ const HomeScreen = ({ navigation }) => {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  goalBox: {
+      borderWidth: 1,
+      borderColor: '#ccc',
+      padding: 15,
+      borderRadius: 8,
+      marginBottom: 20,
+      backgroundColor: '#f9f9f9',
+      shadowColor: '#000',
+      shadowOffset: {
+          width: 0,
+          height: 1,
+      },
+      shadowOpacity: 0.22,
+      shadowRadius: 2.22,
+      elevation: 3,
+  },
+});
+
 
 export default HomeScreen;
 
