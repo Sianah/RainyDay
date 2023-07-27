@@ -10,9 +10,10 @@ const HomeScreen = ({ navigation }) => {
         data={goals}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
-          <View>
-            <Text>{item.goalName}: ${item.amountRequired}</Text>
-            {/* Display other attributes as needed */}
+          <View style={{ marginBottom: 15 }}>
+            <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{item.goalName}</Text>
+            <Text>Amount Required: ${item.amountRequired}</Text>
+            <Text>Estimated Completion By: {item.estimatedCompletion}</Text>
           </View>
         )}
       />
@@ -26,5 +27,6 @@ const HomeScreen = ({ navigation }) => {
 }
 
 export default HomeScreen;
+
 
 
