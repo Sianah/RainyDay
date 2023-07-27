@@ -1,26 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, Button } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Button, FlatList } from 'react-native';
 
 const HomeScreen = ({ navigation }) => {
-    const [goals, setGoals] = useState([]);
-
-  useEffect(() => {
-    const loadGoals = async () => {
-      const storedGoals = await getData(); 
-      if (storedGoals) {
-        setGoals(storedGoals);
-      }
-    };
-
-    loadGoals();
-  }, []);
+  const [goals, setGoals] = useState([]);
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Goals List</Text>
-      <Button title="Add Goal" onPress={() => navigation.navigate('InputGoal')} />
+    <View style={{ flex: 1, padding: 20 }}>
+      <FlatList 
+        data={goals}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item }) => (
+          <View>
+            <Text>{item.goalName}: ${item.amountRequired}</Text>
+            {/* Display other attributes as needed */}
+          </View>
+        )}
+      />
+
+      <Button 
+        title="Add New Goal" 
+        onPress={() => navigation.navigate('InputGoal', { setGoals })}
+      />
     </View>
   );
-};
+}
 
 export default HomeScreen;
+
