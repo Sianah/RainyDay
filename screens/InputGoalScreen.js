@@ -6,8 +6,14 @@ const InputGoalScreen = ({ navigation }) => {
   const [amountRequired, setAmountRequired] = useState('');
   // ... Other states
 
-  const saveGoal = () => {
+  const saveGoal = async () => {
+    const newGoal = {
+      goalName,
+      amountRequired,
     // Logic to save the goal, calculate estimated date etc.
+    };
+    await storeData(newGoal);
+
     navigation.goBack();
   };
 
