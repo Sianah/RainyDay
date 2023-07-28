@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "RainyDay",
-    "slug": "RainyDay",
+    "slug": "rainyday",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -21,10 +21,17 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.itsasma11world.rainyday"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "0496032c-9897-40b1-a5f5-41512fa4009c"
+      }
+    },
+    "owner": "itsasma11world"
   }
 }
