@@ -85,15 +85,12 @@ return (
           <Text>Estimated Completion By: {item.estimatedCompletion}</Text>
         </View>
       )}
-      
-      
-    />
-    <TouchableOpacity 
-        style={styles.addButton}
-        onPress={() => navigation.navigate('InputGoal')}
-      >
-        <Text style={styles.addButtonText}>+</Text>
-      </TouchableOpacity>
+     />
+     <View style={styles.addButtonContainer}>
+        <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('InputGoal')}>
+          <Text style={styles.addButtonText}>+</Text>
+        </TouchableOpacity>
+      </View>
   </View>
   </ImageBackground>
 );
@@ -150,15 +147,12 @@ const styles = StyleSheet.create({
   },
 
   addButton: {
-    backgroundColor: '#f9f9f9',  // Blue background
-    width: 50,   // Circle width
-    height: 50,  // Circle height
-    borderRadius: 25, // Half of width/height to achieve the circle shape
-    justifyContent: 'center',  // Center the "+" vertically
-    alignItems: 'center',      // Center the "+" horizontally
-    position: 'absolute',     // Use absolute position to place it at the desired position
-    bottom: 30,               // For example, 30 units from the bottom
-    right: 20,                // For example, 20 units from the right
+    backgroundColor: '#f9f9f9',
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -167,7 +161,14 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-  },
+    marginTop: 10, // Optional, to give some space from the last goal box
+},
+  
+addButtonContainer: {
+  justifyContent: 'center',
+  alignItems: 'flex-end', // Align the button to the right
+  paddingRight: 1,       // Give it some padding from the right side
+},
   addButtonText: {
     color: '#2196F3',  // White text color
     fontSize: 30,    // Adjust as needed
