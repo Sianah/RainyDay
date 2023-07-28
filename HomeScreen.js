@@ -62,24 +62,26 @@ return (
       keyExtractor={(item, index) => index.toString()}
       renderItem={({ item, index }) => (
         <View style={styles.goalBox}>
-          <View style={{ flex: 4 }}>
-          <Text style={styles.goalNameText}>{item.goalName}</Text>
-            <Text>Amount Required: ${item.amountRequired}</Text>
-            <Text>Estimated Completion By: {item.estimatedCompletion}</Text>
-          </View>
-          
-          <View style={styles.buttonContainer}>
+          <View style={styles.headerRow}>
             <Button 
-              style={styles.editButton}
               title="Edit" 
               onPress={() => {
                 navigation.navigate('InputGoal', { existingGoal: item, goalIndex: index });
               }} 
             />
-            <Button title="Delete" onPress={() => handleDeleteGoal(index)} />
+            <Text style={styles.goalNameText}>{item.goalName}</Text>
+            <Button 
+              title="Delete" 
+              onPress={() => handleDeleteGoal(index)} 
+            />
           </View>
+      
+          <Text>Amount Required: ${item.amountRequired}</Text>
+          <Text>Estimated Completion By: {item.estimatedCompletion}</Text>
         </View>
       )}
+      
+      
     />
     <Button 
       title="Add New Goal" 
@@ -108,10 +110,17 @@ const styles = StyleSheet.create({
       shadowRadius: 2.22,
       elevation: 3,
   },
+  headerRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between', // Ensures items are spaced evenly
+    alignItems: 'center', // Vertically aligns items in the center
+    marginBottom: 10, // Optional: Adds some space between this row and the next items
+  },
   goalNameText: {
     fontSize: 16,
     fontWeight: 'bold',
-    textAlign: 'center',  // Center the text within its container
+    flex: 1, // This makes the goal name text take the available space
+    textAlign: 'center',
   },
   editButtonContainer: {
     flex: 1,
@@ -125,6 +134,11 @@ const styles = StyleSheet.create({
   },
   editButton: {
     marginRight: 'auto'  // Push the button to the left side
+  },
+  buttonsRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between', // Ensures buttons are on opposite ends
+    marginBottom: 10, // Optional: Adds some space between the buttons and the next item
   },
 });
 
