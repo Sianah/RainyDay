@@ -55,32 +55,43 @@ const handleDeleteGoal = (index) => {
   storeData(updatedGoals);  // Saving the updated list to AsyncStorage
 };
 
-  return (
-    <View style={{ flex: 1, padding: 20 }}>
-      <FlatList 
-        data={goals}
-        keyExtractor={(item, index) => index.toString()}
-  renderItem={({ item, index }) => (
-          <View style={styles.goalBox}>
-    <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{item.goalName}</Text>
-    <Text>Amount Required: ${item.amountRequired}</Text>
-    <Text>Estimated Completion By: {item.estimatedCompletion}</Text>
-    <Button title="Delete" onPress={() => handleDeleteGoal(index)} />
-    <Button title="Edit" onPress={() => {
-              navigation.navigate('InputGoal', { existingGoal: item, goalIndex: index });
-              }} />
+return (
+  <View style={{ flex: 1, padding: 20 }}>
+    <FlatList 
+      data={goals}
+      keyExtractor={(item, index) => index.toString()}
+      renderItem={({ item, index }) => (
+        <View style={styles.goalBox}>
+          <View style={{ flex: 4 }}>
+          <Text style={styles.goalNameText}>{item.goalName}</Text>
+            <Text>Amount Required: ${item.amountRequired}</Text>
+            <Text>Estimated Completion By: {item.estimatedCompletion}</Text>
+          </View>
+          
+          <View style={styles.buttonContainer}>
+            <Button 
+              style={styles.editButton}
+              title="Edit" 
+              onPress={() => {
+                navigation.navigate('InputGoal', { existingGoal: item, goalIndex: index });
+              }} 
+            />
+            <Button title="Delete" onPress={() => handleDeleteGoal(index)} />
+          </View>
+        </View>
+      )}
+    />
+    <Button 
+      title="Add New Goal" 
+      onPress={() => navigation.navigate('InputGoal')}
+    />
   </View>
-        )}
-      />
-      <Button 
-        title="Add New Goal" 
-        onPress={() => navigation.navigate('InputGoal')}
-      />
-    </View>
-  );
+);
+
 }
 
 const styles = StyleSheet.create({
+  
   goalBox: {
       borderWidth: 1,
       borderColor: '#ccc',
@@ -96,6 +107,24 @@ const styles = StyleSheet.create({
       shadowOpacity: 0.22,
       shadowRadius: 2.22,
       elevation: 3,
+  },
+  goalNameText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',  // Center the text within its container
+  },
+  editButtonContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',  // Align to the bottom
+    alignItems: 'flex-start',    // Align to the left
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+  editButton: {
+    marginRight: 'auto'  // Push the button to the left side
   },
 });
 
