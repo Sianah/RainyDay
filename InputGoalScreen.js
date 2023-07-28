@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, StyleSheet, Text } from 'react-native';
+import { useGoals } from './GoalsContext'; // Ensure this path points to your GoalsContext.js file
+
 
 const InputGoalScreen = ({ route, navigation }) => {
   const [goalName, setGoalName] = useState('');
   const [amountRequired, setAmountRequired] = useState('');
   const [estimatedCompletion, setEstimatedCompletion] = useState('');
 
-  const { setGoals } = route.params;
+  const { goals, setGoals } = useGoals();
+
 
   const handleAddGoal = () => {
     // Code to add a goal

@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { View, Text, Button, FlatList, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect } from 'react';
+import { useGoals } from './GoalsContext'; 
 
 
 const HomeScreen = ({ navigation }) => {
-  const [goals, setGoals] = useState([]);
+  const { goals, setGoals } = useGoals();
   const storeData = async (value) => {
     try {
       const jsonValue = JSON.stringify(value)
@@ -27,8 +28,11 @@ const loadData = async () => {
   }
 }
 
+useEffect(() => {
+  loadData();
+}, []);
 
-
+useEffect(() => {
   navigation.setOptions({
     title: 'Home',
     headerLeft: () => (
@@ -38,10 +42,11 @@ const loadData = async () => {
       />
     ),
   });
-  useEffect(() => {
-    loadData();
-}, []);
+}, [navigation, goals]);
 
+useEffect(() => {
+  storeData(goals);
+}, [goals]);
 
   return (
     <View style={{ flex: 1, padding: 20 }}>
@@ -58,7 +63,7 @@ const loadData = async () => {
       />
       <Button 
         title="Add New Goal" 
-        onPress={() => navigation.navigate('InputGoal', { setGoals })}
+        onPress={() => navigation.navigate('InputGoal')}
       />
     </View>
   );
