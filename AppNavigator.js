@@ -1,4 +1,4 @@
-import TotalSavingsScreen from './path_to_your_screens_folder/TotalSavingsScreen';
+import TotalSavingsScreen from './TotalSavingsScreen';
 
 const Stack = createStackNavigator();
 

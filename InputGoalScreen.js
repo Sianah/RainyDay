@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, StyleSheet, Text } from 'react-native';
 import { useGoals } from './GoalsContext'; // Ensure this path points to your GoalsContext.js file
+import { useEffect } from 'react';
 
 
 const InputGoalScreen = ({ route, navigation }) => {
@@ -9,19 +10,13 @@ const InputGoalScreen = ({ route, navigation }) => {
   const [goalName, setGoalName] = useState('');
   const [amountRequired, setAmountRequired] = useState('');
   const [estimatedCompletion, setEstimatedCompletion] = useState('');
-
+  useEffect(() => {
+    navigation.setOptions({
+      title: 'Input Goal',
+    });
+  }, [navigation]);
   
 
-
-  const handleAddGoal = () => {
-    // Code to add a goal
-    setGoals(prevGoals => {
-      const newGoals = [...prevGoals, { goalName, amountRequired, estimatedCompletion }];
-      return newGoals;
-  });
-  
-    navigation.goBack();
-  };
 
   const handleSaveGoal = () => {
     if (existingGoal) {

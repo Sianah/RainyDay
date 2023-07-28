@@ -41,7 +41,7 @@ useEffect(() => {
     title: 'Home',
     headerLeft: () => (
       <Button
-        title="Total Saving"
+        title="Total Savings"
         onPress={() => navigation.navigate('TotalSavings', { goals })}
       />
     ),
@@ -60,7 +60,7 @@ const handleDeleteGoal = (index) => {
 };
 
 return (
-  <ImageBackground source={require('./blueGradient.jpg')} style={{ flex: 1 }}>
+  <ImageBackground source={require('./tinyCactus.jpg')} style={{ flex: 1 }}>
   <View style={{ flex: 1, padding: 20 }}>
     <FlatList 
       data={goals}
@@ -81,8 +81,12 @@ return (
             />
           </View>
       
-          <Text>Amount Required: ${item.amountRequired}</Text>
-          <Text>Estimated Completion By: {item.estimatedCompletion}</Text>
+          <Text>
+    <Text style={styles.boldLabel}>Amount Required:</Text> ${item.amountRequired}
+  </Text>
+  <Text>
+    <Text style={styles.boldLabel}>Completion Date:</Text> {item.estimatedCompletion}
+  </Text>
         </View>
       )}
      />
@@ -174,6 +178,11 @@ addButtonContainer: {
     fontSize: 30,    // Adjust as needed
     fontWeight: 'bold'
   },
+  boldLabel: {
+    fontWeight: 'bold',
+  },
+  
+  
 });
 
 
