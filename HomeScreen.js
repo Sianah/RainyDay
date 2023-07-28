@@ -48,17 +48,25 @@ useEffect(() => {
   storeData(goals);
 }, [goals]);
 
+const handleDeleteGoal = (index) => {
+  const updatedGoals = [...goals];
+  updatedGoals.splice(index, 1);
+  setGoals(updatedGoals);
+  storeData(updatedGoals);  // Saving the updated list to AsyncStorage
+};
+
   return (
     <View style={{ flex: 1, padding: 20 }}>
       <FlatList 
         data={goals}
         keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => (
+  renderItem={({ item, index }) => (
           <View style={styles.goalBox}>
-            <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{item.goalName}</Text>
-            <Text>Amount Required: ${item.amountRequired}</Text>
-            <Text>Estimated Completion By: {item.estimatedCompletion}</Text>
-          </View>
+    <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{item.goalName}</Text>
+    <Text>Amount Required: ${item.amountRequired}</Text>
+    <Text>Estimated Completion By: {item.estimatedCompletion}</Text>
+    <Button title="Delete" onPress={() => handleDeleteGoal(index)} />
+  </View>
         )}
       />
       <Button 
