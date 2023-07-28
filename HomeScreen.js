@@ -66,6 +66,9 @@ const handleDeleteGoal = (index) => {
     <Text>Amount Required: ${item.amountRequired}</Text>
     <Text>Estimated Completion By: {item.estimatedCompletion}</Text>
     <Button title="Delete" onPress={() => handleDeleteGoal(index)} />
+    <Button title="Edit" onPress={() => {
+              navigation.navigate('InputGoal', { existingGoal: item, goalIndex: index });
+              }} />
   </View>
         )}
       />

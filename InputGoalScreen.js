@@ -4,11 +4,13 @@ import { useGoals } from './GoalsContext'; // Ensure this path points to your Go
 
 
 const InputGoalScreen = ({ route, navigation }) => {
+  const { existingGoal } = route.params || {};
+  const { goals, setGoals } = useGoals();
   const [goalName, setGoalName] = useState('');
   const [amountRequired, setAmountRequired] = useState('');
   const [estimatedCompletion, setEstimatedCompletion] = useState('');
 
-  const { goals, setGoals } = useGoals();
+  
 
 
   const handleAddGoal = () => {
@@ -18,6 +20,19 @@ const InputGoalScreen = ({ route, navigation }) => {
       return newGoals;
   });
   
+    navigation.goBack();
+  };
+
+  const handleSaveGoal = () => {
+    if (existingGoal) {
+      // This means we are in edit mode
+      const updatedGoals = [...goals];
+      updatedGoals[route.params.goalIndex] = { goalName, amountRequired, estimatedCompletion };
+      setGoals(updatedGoals);
+    } else {
+      // This is add new goal mode
+      setGoals(prevGoals => [...prevGoals, { goalName, amountRequired, estimatedCompletion }]);
+    }
     navigation.goBack();
   };
 
@@ -47,7 +62,7 @@ const InputGoalScreen = ({ route, navigation }) => {
         onChangeText={setEstimatedCompletion}
         placeholder="Enter when you would like to complete this goal"
       />
-      <Button title="Add Goal" onPress={handleAddGoal} />
+      <Button title={existingGoal ? "Update Goal" : "Add Goal"} onPress={handleSaveGoal} />
     </View>
   );
 };
